@@ -28,6 +28,19 @@ const TransUnitSourcePanel = React.createClass({
 
     const isLoading = !this.props.phrase.sources
 
+    const rtlDir = this.props.selected
+    ? 'rtl'
+    : 'ltr'
+
+    const RTLButton = this.props.selected
+        ? <IconButton
+          icon="copy"
+          title="test"
+          onClick={rtlDir}
+          className="u-floatRight Link Link--neutral u-sizeHeight-1
+          u-sizeWidth-1 u-textCenter" />
+        : undefined
+
     const sources = isLoading
       ? <span className="u-textMeta">
         <LoaderText loading />
@@ -67,7 +80,10 @@ const TransUnitSourcePanel = React.createClass({
           return (
             <div className="TransUnit-item" key={index}>
               {itemHeader}
-              <pre className="TransUnit-text">{source}</pre>
+              <pre className="TransUnit-text">
+                {RTLButton}
+                <span dir={rtlDir}>{source}
+                </span></pre>
             </div>
           )
         })
@@ -77,17 +93,7 @@ const TransUnitSourcePanel = React.createClass({
       ? (
       <div className="TransUnit-panelFooter TransUnit-panelFooter--source
                       u-sm-hidden">
-        <div className="u-sizeHeight-1_1-2">
-          {/*
-          <button ng-show="appCtrl.PRODUCTION"
-            class="Link Link--neutral u-sizeHeight-1_1-2"
-            title="{{::'Details'|translate}}">
-            <icon name="info"
-              title="{{::'Details'|translate}}"
-              class="u-sizeWidth-1_1-2"></icon>
-          </button>
-          */}
-        </div>
+        <div className="u-sizeHeight-1_1-2" />
       </div>
       )
       : undefined
@@ -96,7 +102,7 @@ const TransUnitSourcePanel = React.createClass({
       <div className="TransUnit-panel TransUnit-source">
         {header}
         {sources}
-        {footer}
+         {footer}
       </div>
     )
   }
