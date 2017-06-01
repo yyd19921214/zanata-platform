@@ -252,8 +252,9 @@ timestamps {
           // archive build artifacts (and cross-referenced source code)
           archive "**/${jarFiles},**/${warFiles},**/target/site/xref/**"
 
-          // parse Jacoco test coverage
+          // parse test coverage XML files
           step([$class: 'JacocoPublisher'])
+          step([$class: 'CoberturaPublisher'])
 
           // ref: https://philphilphil.wordpress.com/2016/12/28/using-static-code-analysis-tools-with-jenkins-pipeline-jobs/
           step([$class: 'CheckStylePublisher',
